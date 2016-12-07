@@ -89,7 +89,8 @@ document.registerElement(
         }
 
         closeModal() {
-            this.style.display = 'none'
+            this.style.display = 'none';
+            $('.new-task-modal-overlay').fadeTo("fast", 0);
             this.fieldReset();
         }
 

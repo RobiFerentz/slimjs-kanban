@@ -4,6 +4,7 @@
   background:url(http://thekitemap.com/images/feedback-img.jpg) no-repeat;
   background-size: cover;
   height:100%;
+	z-index: 1000;
 }
 
 #feedback-page{
@@ -18,7 +19,7 @@
 
 .form-div {
   position: relative;
-	background-color:rgba(72,72,72,0.4);
+	background-color:rgba(182, 182, 182, 0.9);
 	padding-left:35px;
 	padding-right:35px;
 	padding-top:35px;
@@ -31,6 +32,8 @@
 	margin-left: -260px;
   -moz-border-radius: 7px;
   -webkit-border-radius: 7px;
+	z-index: 100;
+	box-shadow: 0px 0px 10px black;
 }
 
 .new-task-header {
@@ -55,6 +58,15 @@
 		margin-top: 0;
 		margin-bottom: 4px;
 		font-size: 16px;
+	}
+	.new-task-modal-overlay {
+		height: 100%;
+		width: 100%;
+		background: rgba(0,0,0,0.6);
+		z-index: 1;
+		position: fixed;
+		opacity: 0;
+		transition: 0.4s;
 	}
 	.card-vertical-spacer {
 		display:inline-block;
@@ -235,6 +247,7 @@ input:focus, textarea:focus {
 }
 
 .fab-button {
+	border: none;
 	position: fixed;
 	height: 50px;
 	width: 50px;
@@ -242,12 +255,19 @@ input:focus, textarea:focus {
 	border-radius: 80px;
 	bottom: 10px;
 	right: 10px;
-	background-image: url(https://upload.wikimedia.org/wikipedia/commons/9/9e/Plus_symbol.svg);
-	background-size: 30px 30px;
-	background-position: 8px 8px;
+	/*background-image: url(https://upload.wikimedia.org/wikipedia/commons/9/9e/Plus_symbol.svg);*/
+	background-image: url(../plus.svg);
+	background-size: 40px 40px;
+	background-position: 5px 5px;
 	background-repeat: no-repeat;
 	user-select: none;
 	outline: none;
+	z-index: 50;
+	transition: 0.4s;
+}
+
+.fab-button:hover {
+	transform: rotate(-90deg);
 }
 
 .task-status {

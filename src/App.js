@@ -16,6 +16,7 @@
         get template() {
             return `<div style="flex-grow:3000"><button value="Add new task" class="fab-button"></button></div>
         <s-repeat source="columns"><task-column></task-column></s-repeat>
+        <div class="new-task-modal-overlay"></div>
         <new-task-modal task-data="[model]"></new-task-modal>`
         }
 
@@ -35,7 +36,7 @@
 
         startModal() {
             this.find('new-task-modal').style.display = 'initial';
-            this.find('new-task-modal-overlay').style.opacity = '1';
+            this.find('.new-task-modal-overlay').style.opacity = '1';
         }
 
     })

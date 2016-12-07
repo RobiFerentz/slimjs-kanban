@@ -27,7 +27,6 @@ exports.mongo = (function() {
                                 reject(err)
                             } else {
                                 log(`Successfully added column ${JSON.stringify(column)}`)
-                                column.id = column._id
                                 resolve(column)
                             }
                             db.close()
@@ -78,7 +77,6 @@ exports.mongo = (function() {
                                 log(`Cannot find column with ID ${columnId}`)
                                 reject('Not found')
                             } else {
-                                result[0].id = result[0]._id
                                 log(`Got column: ${result[0]}`)
                                 resolve(result[0])
                             }
@@ -103,7 +101,6 @@ exports.mongo = (function() {
                                 reject(err)
                             } else {
                                 log(`Successfully added task ${JSON.stringify(task)}`)
-                                task.id = task._id
                                 resolve(task)
                             }
                             db.close()

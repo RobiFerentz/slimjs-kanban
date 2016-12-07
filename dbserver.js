@@ -19,6 +19,10 @@ app.get('/', function (req, res) {
             'parameters': 'A JSON representation of the column in the body',
             'returns': 'The new column, with an "id" field'
         },
+        'GET /column/get': {
+            'description': 'Get all the columns',
+            'returns': 'An array of column objects'
+        },
         'GET /column/get?id=<columnId>': {
             'description': 'Get a column',
             'parameters': 'The ID of the column',
@@ -63,18 +67,31 @@ app.post('/column/add', function (req, res) {
 });
 
 app.get('/column/get', function(req, res) {
-    let columnId = req.query.id
-    log(`Getting column with ID '${columnId}'`)
-    dbclient.getColumn(columnId)
-        .then((result) => {
-            log(`Got column ${JSON.stringify(result)}`)
-            res.send(result)
-        })
-        .catch((err) => {
-            let msg = `Failed to get column with ID ${JSON.stringify(columnId)}: ${err}`
-            log(msg)
-            res.send(msg)
-        })
+    if(req.query.id) {
+        let columnId = req.query.id
+        log(`Getting column with ID '${columnId}'`)
+        dbclient.getColumn(columnId)
+            .then((result) => {
+                log(`Got column ${JSON.stringify(result)}`)
+                res.send(result)
+            })
+            .catch((err) => {
+                let msg = `Failed to get all columns: ${err}`
+                log(msg)
+                res.send(msg)
+            })
+    } else {
+        dbclient.getAllColumns()
+            .then((result) => {
+                log(`Got ${result.length} columns`)
+                res.send(result)
+            })
+            .catch((err) => {
+                let msg = `Failed to get all columns: ${err}`
+                log(msg)
+                res.send(msg)
+            })
+    }
 })
 
 app.post('/task/add', function(req, res) {

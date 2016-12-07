@@ -36,6 +36,28 @@ exports.mongo = (function() {
                 })
             })
         },
+        getAllColumns: function() {
+            return new Promise((resolve, reject) => {
+                mongoClient.connect(DB_URL, function (err, db) {
+                    if(err) {
+                        log(`Error getting all columns: ${err}`)
+                        reject(err)
+                    } else {
+                        let collection = db.collection(COLLECTION_COLUMNS)
+                        collection.find().toArray((err, result) => {
+                            if(err) {
+                                log(`Error getting all columns: ${err}`)
+                                reject(err)
+                            } else {
+                                log(`Got ${result.length} columns`)
+                                resolve(result)
+                            }
+                            db.close()
+                        })
+                    }
+                })
+            })
+        },
         getColumn: function(columnId) {
             log(`Getting column with ID '${columnId}'`)
             return new Promise((resolve, reject) => {

@@ -48,6 +48,8 @@ document.registerElement(
             this.find('.task-repeat').onclick = () => {
                 this.toggleRepeat();
             }
+
+            console.log('This is the taskdata:' , this.taskData);
         }
 
         validateForm() {
@@ -56,6 +58,9 @@ document.registerElement(
         }
 
         submitForm() {
+            this.taskData.tasks.push({
+                name: this.find('.task-title').value
+            });
             window.alert('SUBMITTED!');
         }
 

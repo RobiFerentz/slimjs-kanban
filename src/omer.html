@@ -10,6 +10,7 @@
     <script src="../libs/s-states.js"></script>
     <script src="../libs/s-repeat.js"></script>
     <script src="../libs/s-button.js"></script>
+    <script src="../src/KanbanModel.js"></script>
     <script src="../src/components/new-task-modal.component.js"></script>
     <script src="../src/components/task-item.component.js"></script>    
 </head>
@@ -17,7 +18,7 @@
 
 <s-container>
     <!-- our code is here -->
-    <new-task-modal></new-task-modal>
+    <new-task-modal task-data="{model}"></new-task-modal>
 </s-container>
 
 </body>

@@ -14,12 +14,10 @@
         }
 
         get template() {
-            return `
-            <button value="Add new task" class="fab-button"></button>
-            <s-repeat source="columns">
-                <task-column></task-column>
-            </s-repeat>
-            <new-task-modal task-data="[model]"></new-task-modal>`
+
+            return `<div style="flex-grow:3000"><button value="Add new task"></button></div>
+<s-repeat source="columns"><task-column></task-column></s-repeat>
+<new-task-modal task-data="[model]"></new-task-modal>`
         }
 
         render() {

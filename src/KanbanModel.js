@@ -16,6 +16,7 @@
 
         constructor() {
             super()
+            this.defaultColumnId = null;
             this._columns = {}
             this._tasks = []
             this.loadColumns()
@@ -38,8 +39,12 @@
         }
 
         parseColumnsFromServer( data ) {
+            this.defaultColumnId = null;
             this._columns = {}
             data.forEach( column => {
+                if (!this.defaultColumnId) {
+                    this.defaultColumnId = column._id
+                }
                 this._columns[column._id] = column
             })
         }
@@ -72,10 +77,12 @@
             })
         }
 
-        addTask(task) {
-            task.id = this.tasks.length
-            this.tasks.push(task)
-            this.dispatchEvent(new Event('change'))
+        addTask(task, callback) {
+            task.columnId = this.defaultColumnId
+            $.post(`${endpoint}/task/add`, task).done( () => {
+                this.loadColumns();
+                callback()
+            })
         }
 
         moveTask(task, column) {

@@ -4,13 +4,21 @@
 
 (function () {
     Slim('app-root', class extends SlimBaseElement {
-        set model (value) {
-            this._model = value;
-            this.model.load();
-            this.model.addEventListener('change', update.bind(this))
+
+        afterRender() {
+            console.log(this.model)
         }
-        get model () {
-            return this._model;
+
+        get columns() {
+            return this.model.columns
+        }
+
+        get template() {
+            return `<s-repeat source="columns"><task-column></task-column></s-repeat>`;
+        }
+
+        afterRender() {
+            this.find('s-repeat').update()
         }
 
     })

@@ -15,7 +15,7 @@
             }
             head.appendChild(style);
 
-        })()
+        })();
 
 
         window.Slim = document.registerElement.bind(document)

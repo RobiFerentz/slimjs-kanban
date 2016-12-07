@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/RobiFerentz/slimjs-kanban/issues"
   },
-  "homepage": "https://github.com/RobiFerentz/slimjs-kanban#readme"
+  "homepage": "https://github.com/RobiFerentz/slimjs-kanban#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongodb": "^2.2.13"
+  }
 }

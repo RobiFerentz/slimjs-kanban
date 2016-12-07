@@ -1,5 +1,5 @@
 let express = require('express')
-var bodyParser = require('body-parser');
+let bodyParser = require('body-parser');
 let dbclient = require('./dbclient')
 
 let app = express()
@@ -28,6 +28,11 @@ app.get('/', function (req, res) {
             'description': 'Get a task by the ID',
             'parameters': 'The ID of the task',
             'returns': 'The task object'
+        },
+        'GET /task/get?columnid=<columnId>': {
+            'description': 'Get all tasks for a given column',
+            'parameters': 'The ID of the column',
+            'returns': 'An array of task objects'
         }
     }
     res.send(options)

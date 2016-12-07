@@ -1,3 +1,4 @@
+let config = require('./db_config').mongodb_config
 let mongoClient = require('mongodb').MongoClient
 let ObjectId = require('mongodb').ObjectId
 
@@ -5,7 +6,7 @@ exports = module.exports = {}
 
 function log(msg) {console.log(`[Mongo] ${msg}`)}
 
-let DB_URL = 'mongodb://localhost:27017/slimjs-kanban'
+let DB_URL = config.url
 let COLLECTION_TASKS = 'tasks'
 let COLLECTION_COLUMNS = 'columns'
 
@@ -106,7 +107,7 @@ exports.mongo = (function() {
                                 reject(err)
                             } else if(result.length == 0) {
                                 log(`Cannot find task with ID ${taskId}`)
-                                reject('Not found')
+                                resolve({})
                             } else {
                                 log(`Got task: ${result[0]}`)
                                 resolve(result[0])
@@ -132,9 +133,6 @@ exports.mongo = (function() {
                             if(err) {
                                 log(`Error getting tasks by column ID ${columnId}: ${err}`)
                                 reject(err)
-                            } else if(result.length == 0) {
-                                log(`Cannot find tasks for column ID ${columnId}`)
-                                reject('Not found')
                             } else {
                                 log(`Got ${result.length} tasks`)
                                 resolve(result)

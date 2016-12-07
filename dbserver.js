@@ -105,6 +105,8 @@ app.get('/task/get', function(req, res) {
                 log(msg)
                 res.send(msg)
             })
+    } else {
+        res.send('No parameters defined')
     }
 })
 

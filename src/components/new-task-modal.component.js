@@ -56,6 +56,13 @@ document.registerElement(
             this.find('.task-due').onclick = () => {
                 this.fieldReset('.task-due');
             }
+
+            $(document).keyup( function(e) {
+                if (e.keyCode === 27) {
+                    $('new-task-modal').css("display", "none");
+                    $('.new-task-modal-overlay').fadeTo("fast", 0);
+                } 
+            });
 /*
             this.find('.task-repeat').onclick = () => {
                 this.toggleRepeat();

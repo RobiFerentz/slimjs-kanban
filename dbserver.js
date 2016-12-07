@@ -52,6 +52,6 @@ app.get('/column/get', function(req, res) {
         })
 })
 
-app.listen(3000, function () {
-    console.log('Example app listening on port 3000!')
+app.listen(3003, function () {
+    console.log('DB server listening on port 3003!')
 })

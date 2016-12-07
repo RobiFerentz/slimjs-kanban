@@ -24,6 +24,10 @@ app.get('/', function (req, res) {
             'parameters': 'A JSON representation of the task in the body',
             'returns': 'The new task, with an "id" field'
         },
+        'GET /task/get': {
+            'description': 'Get all the tasks',
+            'returns': 'An array of task objects'
+        },
         'GET /task/get?id=<taskId>': {
             'description': 'Get a task by the ID',
             'parameters': 'The ID of the task',
@@ -111,7 +115,17 @@ app.get('/task/get', function(req, res) {
                 res.send(msg)
             })
     } else {
-        res.send('No parameters defined')
+        log(`Getting all tasks`)
+        dbclient.getAllTasks()
+            .then((result) => {
+                log(`Got ${result.length} tasks`)
+                res.send(result)
+            })
+            .catch((err) => {
+                let msg = `Failed to get all tasks: ${err}`
+                log(msg)
+                res.send(msg)
+            })
     }
 })
 

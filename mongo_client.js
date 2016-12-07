@@ -90,6 +90,28 @@ exports.mongo = (function() {
                 })
             })
         },
+        getAllTasks: function() {
+            return new Promise((resolve, reject) => {
+                mongoClient.connect(DB_URL, function (err, db) {
+                    if(err) {
+                        log(`Error getting all tasks: ${err}`)
+                        reject(err)
+                    } else {
+                        let collection = db.collection(COLLECTION_TASKS)
+                        collection.find().toArray((err, result) => {
+                            if(err) {
+                                log(`Error getting all tasks: ${err}`)
+                                reject(err)
+                            } else {
+                                log(`Got ${result.length} tasks`)
+                                resolve(result)
+                            }
+                            db.close()
+                        })
+                    }
+                })
+            })
+        },
         getTaskById: function(taskId) {
             return new Promise((resolve, reject) => {
                 mongoClient.connect(DB_URL, function (err, db) {

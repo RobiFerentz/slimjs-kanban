@@ -2,8 +2,9 @@
 Our very own task scheduler, built on slim.js! :)
 
 Team members:
+Sigalit
+Dror
 Dima
-Robi
+Robert
 Coby
 Omer
-Shlomit

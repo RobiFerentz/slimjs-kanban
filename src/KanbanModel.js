@@ -25,7 +25,7 @@
         loadColumns() {
             $.ajax(`${endpoint}/column/get`).done( (response) => {
                 this.parseColumnsFromServer(response);
-                console.log(this.columns)
+                // console.log(this.columns)
                 this.loadTasks()
             })
         }
@@ -33,7 +33,7 @@
         loadTasks() {
             $.ajax(`${endpoint}/task/get`).done( (response) => {
                 this.parseItemsFromServer(response)
-                console.log(this.tasks);
+                // console.log(this.tasks);
                 this.dispatchEvent(new Event('change'))
             })
         }

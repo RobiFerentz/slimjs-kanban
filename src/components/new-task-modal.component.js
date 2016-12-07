@@ -63,12 +63,6 @@ document.registerElement(
                     $('.new-task-modal-overlay').fadeTo("fast", 0);
                 } 
             });
-/*
-            this.find('.task-repeat').onclick = () => {
-                this.toggleRepeat();
-            }
-*/
-            console.log('This is the taskdata:' , this.taskData);
         }
 
         validateForm() {

@@ -11,17 +11,19 @@ document.registerElement(
                 <section class="modal-container">
                     <div div="form-main">
                         <div class="form-div">
-                            <div class="task-repeat"></div>
+                            <!-- <div class="task-repeat"></div> -->
                             <h1 class="new-task-header"> Add A New Task </h1>
                             <form class="form" id="form1">
                                 <p>
                                     <input name="task-title" type="text" class="validate[required,custom[task-title]] feedback-input task-title" id="name" placeholder="Title" />
                                 </p>
+                                <!--
                                 <p> 
-                                    <input name="task-duration" type="text" class="validate[required,custom[task-duration]] feedback-input task-duration" id="task-duration" placeholder="Duration" />
+                                    <input name="task-duration" type="number" min="0" max="120" class="validate[required,custom[task-duration]] feedback-input task-duration" id="task-duration" placeholder="Duration" />
                                 </p>
+                                -->
                                 <p>
-                                    <input name="task-due" type="text" class="validate[required,custom[email]] feedback-input task-due" id="task-due" placeholder="Due" />
+                                    <input name="task-due" type="date" class="validate[required,custom[email]] feedback-input task-due" id="task-due" placeholder="Due" />
                                 </p>
                                 <p>
                                     <textarea name="task-desc" class="validate[required,length[6,300]] feedback-input task-desc" id="task-desc" placeholder="Description"></textarea>
@@ -45,27 +47,61 @@ document.registerElement(
                 }
             }
 
+            this.find('.task-title').onclick = () => {
+                this.fieldReset('.task-title');
+            }
+            // this.find('.task-duration').onclick = () => {
+                // this.fieldReset('.task-duration');
+            // }
+            this.find('.task-due').onclick = () => {
+                this.fieldReset('.task-due');
+            }
+/*
             this.find('.task-repeat').onclick = () => {
                 this.toggleRepeat();
             }
-
+*/
             console.log('This is the taskdata:' , this.taskData);
         }
 
         validateForm() {
-            console.log('form validated!');
-            return true;
+            let titleValidated = (this.find('.task-title').value.length > 0);
+            if (!titleValidated) {
+                this.find('.task-title').style.boxShadow = '0px 0px 5px red'
+            }
+            // let durationValidated = (this.find('.task-duration').value.length > 0);
+            // if (!durationValidated) {
+                // this.find('.task-duration').style.boxShadow = '0px 0px 5px red'
+            // }
+            let dueValidated = (this.find('.task-due').value.length > 0);
+            if (!dueValidated) {
+                this.find('.task-due').style.boxShadow = '0px 0px 5px red'
+            }
+            if (titleValidated && dueValidated) {
+                this.find('.task-title').value = '';                
+                // this.find('.task-duration').value = '';
+                this.find('.task-due').value = '';
+                return true;
+            } else {
+                return false;
+            }
         }
 
         submitForm() {
             this.taskData.addTask({
                 name: this.find('.task-title').value,
-                columnId: 0
+                // duration: this.find('.task-duration').value,
+                due: this.find('.task-due').value,
+                desc: this.find('.task-desc').value
             });
             this.style.display = 'none'
         }
 
         toggleRepeat() {
             window.alert('repeat toggled...')
+        }
+
+        fieldReset(field) {
+            this.find(field).style.boxShadow = '';
         }
     })

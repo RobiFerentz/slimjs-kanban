@@ -5,7 +5,7 @@ app.use(express.static(__dirname));
 
 app.get('/', function (req, res) {
     console.log('got a hit!');
-    res.sendFile(__dirname + '/src/omer.html');
+    res.sendFile(__dirname + '/src/index.html');
 })
 
 app.listen(3000, function () {

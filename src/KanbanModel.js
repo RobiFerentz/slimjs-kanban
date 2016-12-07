@@ -8,9 +8,6 @@
             ['addEventListener', 'dispatchEvent', 'removeEventListener'].forEach(
                 f => this[f] = (...xs) => delegate[f](...xs)
             )
-            this.todos = []
-            this.columns = {}
-            this.load()
         }
     }
 
@@ -19,18 +16,54 @@
 
         constructor() {
             super()
-            this.columns = []
-            this.tasks = []
+            this._columns = {}
+            this._tasks = []
+            this.loadColumns()
         }
 
-        load() {
+        loadColumns() {
+            $.ajax(`${endpoint}/column/get`).done( (response) => {
+                this.parseColumnsFromServer(response);
+                console.log(this.columns)
+                this.loadTasks()
+            })
+        }
+
+        loadTasks() {
             $.ajax(`${endpoint}/task/get`).done( (response) => {
-                console.log(response)
+                this.parseItemsFromServer(response)
+                console.log(this.tasks);
+                this.dispatchEvent(new Event('change'))
+            })
+        }
+
+        parseColumnsFromServer( data ) {
+            this._columns = {}
+            data.forEach( column => {
+                this._columns[column._id] = column
             })
         }
 
         parseItemsFromServer(data) {
+            this._tasks = data;
+        }
 
+        get columns() {
+            var result = []
+            for (var id in this._columns) {
+                result.push( {
+                    id: id,
+                    name: this._columns[id].name,
+                    getTasks: function() {
+                        return instance.getTasksByColumnId( this.id )
+                    }
+                })
+            }
+            return result;
+        }
+
+        get tasks() {
+            return this._tasks
         }
 
         getTasksByColumnId( columnId ) {

@@ -9,20 +9,16 @@
             console.log(this.model)
         }
 
-        // set model(value){
-        //     this._model = value;
-        // }
-        //
-        // get model() {
-        //     return this._model;
-        // }
-
         get columns() {
-            return [{ name: 'col 1'}, { name: 'col 2'}, { name: 'col 3'}]
+            return this.model.columns
         }
 
         get template() {
             return `<s-repeat source="columns"><task-column></task-column></s-repeat>`;
+        }
+
+        afterRender() {
+            this.find('s-repeat').update()
         }
 
     })

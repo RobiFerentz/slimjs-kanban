@@ -32,9 +32,27 @@
 
 
     }
-
-
     const instance = new KanbanModel()
+
+    for (let x = 0; x < 3; x++) {
+        instance.columns.push({
+            name: `column ${x+1}`,
+            id: x,
+            getTasks: function() {
+                return instance.getTasksByColumnId( this.id )
+            }
+        })
+    }
+
+    for (let x = 0; x < 10; x++) {
+        instance.tasks.push({
+            id: x,
+            columnId: x % 3,
+            name: `task number ${x + 1}`
+        })
+    }
+
+
 
     SlimInjector.define('model', () => { return instance })
 

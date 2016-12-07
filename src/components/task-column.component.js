@@ -4,19 +4,16 @@
 (function () {
     Slim('task-column', class extends SlimBaseElement {
         get template() {
-            return `<span bind>[[data.name]]</span><s-repeat source="tasks" ><s-container bind>[[data.what]]</s-container></s-repeat>`;
+            return `<span bind>[[data.name]]</span><s-repeat source="tasks"><task-item></task-item></s-repeat>`;
         }
 
+        get tasks() {
+            var result = this.data.getTasks()
+            return result;
+        }
 
-        // onCreated()(value) {
-        //     this._model = value;
-        //     this.model.load();
-        //     this.model.addEventListener('change', update.bind(this))
-        // }
-        get tasks () {
-            return [ '1', '2' , '3'].map( (what) => {
-                return { what };
-            });
+        getColumnId(column) {
+            return column.id
         }
 
         afterRender() {

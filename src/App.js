@@ -34,7 +34,8 @@
         }
 
         startModal() {
-            this.find('new-task-modal').style.display = 'initial'
+            this.find('new-task-modal').style.display = 'initial';
+            this.find('new-task-modal-overlay').style.opacity = '1';
         }
 
     })

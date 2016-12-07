@@ -18,7 +18,7 @@ app.get('/', function (req, res) {
         'POST /column/add': {
             'description': 'Add a new column',
             'parameters': 'A JSON representation of the column in the body',
-            'returns': 'The new column, with an "id" field'
+            'returns': 'The new column object'
         },
         'GET /column/get': {
             'description': 'Get all the columns',
@@ -32,7 +32,7 @@ app.get('/', function (req, res) {
         'POST /task/add': {
             'description': 'Add a new task',
             'parameters': 'A JSON representation of the task in the body',
-            'returns': 'The new task, with an "id" field'
+            'returns': 'The new task object'
         },
         'GET /task/get': {
             'description': 'Get all the tasks',
@@ -47,6 +47,11 @@ app.get('/', function (req, res) {
             'description': 'Get all tasks for a given column',
             'parameters': 'The ID of the column',
             'returns': 'An array of task objects'
+        },
+        'POST /task/update': {
+            'description': 'Update a new task',
+            'parameters': 'A JSON representation of the task in the body',
+            'returns': 'The updated task'
         }
     }
     res.send(options)
@@ -104,7 +109,7 @@ app.post('/task/add', function(req, res) {
             res.send(task)
         })
         .catch((err) => {
-            let msg = `Failed to add column ${JSON.stringify(column)}: ${err}`
+            let msg = `Failed to add task ${JSON.stringify(task)}: ${err}`
             log(msg)
             res.send(msg)
         })
@@ -152,6 +157,20 @@ app.get('/task/get', function(req, res) {
     }
 })
 
+app.post('/task/update', function(req, res) {
+    let task = req.body
+    log(`Updating task ${task}`);
+    dbclient.addTask(task)
+        .then((result) => {
+            log(`Successfully updated task ${JSON.stringify(task)}`)
+            res.send(task)
+        })
+        .catch((err) => {
+            let msg = `Failed to update task ${JSON.stringify(task)}: ${err}`
+            log(msg)
+            res.send(msg)
+        })
+})
 app.listen(3003, function () {
     console.log('DB server listening on port 3003!')
 })

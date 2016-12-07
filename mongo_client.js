@@ -183,6 +183,31 @@ exports.mongo = (function() {
                     }
                 })
             })
+        },
+        updateTask: function(task) {
+            return new Promise((resolve, reject) => {
+                mongoClient.connect(DB_URL, function (err, db) {
+                    if(err) {
+                        log(`Error updating task ${task}: ${err}`)
+                        reject(err)
+                    } else {
+                        let collection = db.collection(COLLECTION_TASKS)
+                        let filter = {
+                            _id: task._id
+                            // _id: ObjectId(task._id)
+                        }
+                        collection.replaceOne(filter, task)
+                            .then(() => {
+                                log(`Successfully updated task ${task}`)
+                                resolve(task)
+                            })
+                            .catch((err) => {
+                                log(`Error updating task ${task}: ${err}`)
+                                reject(err)
+                            })
+                    }
+                })
+            })
         }
     }
 })()

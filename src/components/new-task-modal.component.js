@@ -1,27 +1,25 @@
-+(function() {
-    Slim('new-task-modal', class extends SlimBaseElement {
+document.registerElement(
+    'new-task-modal',
+    class extends SlimBaseElement {
 
         get updateOnAttributes() {
-            return ['onclick', 'text']
+            return []
         }
 
         get template() {
-            return `<input type="button" />`
+            return `
+                <div id="container">
+                    <p>THIS IS A TEST</p>
+                    <input id="submit" type="button" value="SUBMIT">
+                </div>`
         }
 
-        render() {
-            this.onclick = undefined
-            this.find('input').onclick = (event) => {
-                let methodName = this.getAttribute('onclick')
-                this.parentBind[this.getAttribute('onclick')](event)
+        // @override abstract
+        afterRender() {
+            this.find('#submit').onclick = () => {
+                if (this.validateForm()) {
+                    this.submitForm()
+                }
             }
-            this.update()
         }
-
-        update() {
-            this.find('input').value = this.getAttribute('text')
-        }
-
-
     })
-}())

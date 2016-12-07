@@ -92,6 +92,19 @@ app.get('/task/get', function(req, res) {
                 log(msg)
                 res.send(msg)
             })
+    } else if(req.query.columnid) {
+        let columnId = req.query.columnid
+        log(`Getting task by column ID ${columnId}`)
+        dbclient.getTasksByColumnId(columnId)
+            .then((result) => {
+                log(`Got ${result.length} tasks for column ID ${columnId}`)
+                res.send(result)
+            })
+            .catch((err) => {
+                let msg = `Failed to get task for column ID ${JSON.stringify(columnId)}: ${err}`
+                log(msg)
+                res.send(msg)
+            })
     }
 })
 

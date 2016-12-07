@@ -116,6 +116,34 @@ exports.mongo = (function() {
                     }
                 })
             })
+        },
+        getTasksByColumnId: function(columnId) {
+            return new Promise((resolve, reject) => {
+                mongoClient.connect(DB_URL, function (err, db) {
+                    if(err) {
+                        log(`Error getting tasks by column ID ${columnId}: ${err}`)
+                        reject(err)
+                    } else {
+                        let collection = db.collection(COLLECTION_TASKS)
+                        let filter = {
+                            columnId: {$eq: columnId}
+                        }
+                        collection.find(filter).toArray((err, result) => {
+                            if(err) {
+                                log(`Error getting tasks by column ID ${columnId}: ${err}`)
+                                reject(err)
+                            } else if(result.length == 0) {
+                                log(`Cannot find tasks for column ID ${columnId}`)
+                                reject('Not found')
+                            } else {
+                                log(`Got ${result.length} tasks`)
+                                resolve(result)
+                            }
+                            db.close()
+                        })
+                    }
+                })
+            })
         }
     }
 })()
@@ -179,10 +207,44 @@ function testTask() {
         })
 }
 
+function testTasks() {
+    let mongo = exports.mongo
+    let promises = []
+    promises.push(mongo.addTask({
+        columnId: 'colA',
+        name: 'A first task'
+    }))
+    promises.push(mongo.addTask({
+        columnId: 'colB',
+        name: 'B first task'
+    }))
+    promises.push(mongo.addTask({
+        columnId: 'colA',
+        name: 'A second task'
+    }))
+    Promise.all(promises)
+        .then(() => {
+            mongo.getTasksByColumnId('colA')
+                .then((results) => {
+                    log('Got ${results.length} tasks:')
+                    for(let i = 0; i < results.length; i++ ) {
+                        log(`${JSON.stringify(results[i])}`)
+                    }
+                })
+                .catch((err) => {
+                    log(`Error getting the tasks: ${err}`)
+                })
+        })
+        .catch((err) => {
+            log(`Some kind of error has occured: ${err}`)
+        })
+}
+
 ////////////////////////
 
 // deleteAll()
 // testColumn()
 // testTask()
+// testTasks()
 
 ////////////////////////

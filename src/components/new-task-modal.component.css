@@ -17,7 +17,7 @@
 }
 
 .form-div {
-    position: relative;
+  position: relative;
 	background-color:rgba(72,72,72,0.4);
 	padding-left:35px;
 	padding-right:35px;
@@ -38,16 +38,44 @@
 	float:left;
 	width: 100%;
     color:white;
-	font-size:24px;
+	font-size: 18px;
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
 	transition: all 0.3s;
     margin-top:-4px;
     font-weight:700;
-    text-align: center;
 		text-shadow: 0 1px black;
   }
-
+	.card-task-name {
+		margin-top: 2px;
+		margin-bottom: 0;
+		font-size: 18px;
+	}
+	.card-task-desc {
+		margin-top: 0;
+		margin-bottom: 4px;
+		font-size: 16px;
+	}
+	.card-vertical-spacer {
+		display:inline-block;
+		background: rgba(0,0,0,0.5);
+		height: 40px;
+		width: 1px;
+	}
+	.card-container {
+		min-width: 240px;
+		border-radius: 2px;
+    text-align: center;
+    padding: 0;
+		padding-left: 5px;
+    background: rgba(48, 174, 214, 0.27);
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+    text-align: left;
+	}
 .feedback-input {
 	color:#3c3c3c;
 	font-family: Helvetica, Arial, sans-serif;
@@ -206,6 +234,26 @@ input:focus, textarea:focus {
   background-color:white;
 }
 
+.fab-button {
+	position: fixed;
+	height: 50px;
+	width: 50px;
+	background: #e74c3c;
+	border-radius: 80px;
+	bottom: 10px;
+	right: 10px;
+	background-image: url(https://upload.wikimedia.org/wikipedia/commons/9/9e/Plus_symbol.svg);
+	background-size: 30px 30px;
+	background-position: 8px 8px;
+	background-repeat: no-repeat;
+	user-select: none;
+	outline: none;
+}
+
+.task-status {
+		font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+		font-size: 28px;
+}
 @media only screen and (max-width: 580px) {
 	.form-div{
 		left: 3%;

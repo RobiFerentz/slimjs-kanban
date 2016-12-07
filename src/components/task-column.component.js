@@ -4,7 +4,12 @@
 (function () {
     Slim('task-column', class extends SlimBaseElement {
         get template() {
-            return `<span bind>[[data.name]]</span><s-repeat source="tasks"><task-item></task-item></s-repeat>`;
+            return `
+            <span bind class="task-status">[[data.name]]</span>
+            <s-repeat source="tasks">
+                <task-item>
+                </task-item>
+            </s-repeat>`;
         }
 
         get tasks() {

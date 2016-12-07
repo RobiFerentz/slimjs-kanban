@@ -93,7 +93,7 @@ document.registerElement(
                 // duration: this.find('.task-duration').value,
                 due: this.find('.task-due').value,
                 desc: this.find('.task-desc').value
-            });
+            }, callback);
             this.style.display = 'none'
         }
 

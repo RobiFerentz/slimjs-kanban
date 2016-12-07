@@ -1,5 +1,8 @@
 var express = require('express');
 var app = express()
+var dbClient = require('./dbclient');
+
+// dbClient.getColumn('5848138eb0d1ce1f56c3024f').then((result) => {console.log(result)})
 
 app.use(express.static(__dirname));
 

@@ -25,6 +25,7 @@
             width: 100%;
             height: 100%;
             box-sizing: border-box;
+            background: #30aed6;
         }
 
         app-root {
@@ -33,16 +34,35 @@
         }
 
         task-column {
+            position: relative;
             display: flex;
             flex-direction: column;
             margin-right: 0.5em;
             padding: 30px 20px;
-            border: 1px solid #ff33ee;
+            /*border: 1px solid transparent;*/
             border-radius: 5px;
+            box-shadow: #000 2px 2px 3px;
+            background-color: #fefefe;
+        }
+        task-column:before{
+            content:'';
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            height:20px;
+            width:100%;
+            position: absolute;
+            background-color: #32c9d6;
+            top:0;
+            left:0;
+        }
+        task-column h3{
+            padding-top:3px;
+            margin-top:0;
         }
         task-column>slim-component{
             border:none;
             padding:0;
+            box-shadow: none;
         }
 
 

@@ -14,11 +14,27 @@
         }
 
         get template() {
-            return `<s-repeat source="columns"><task-column></task-column></s-repeat>`;
+            return `<button value="Add new task"></button>
+<s-repeat source="columns"><task-column></task-column></s-repeat>
+<new-task-modal task-data="[model]"></new-task-modal>`
+        }
+
+        render() {
+            this.find('new-task-modal').style.display = 'none'
         }
 
         afterRender() {
             this.find('s-repeat').update()
+            this.find('button').onclick = () => {
+                this.startModal()
+            }
+            this.model.addEventListener('change', () => {
+                this.update(true)
+            })
+        }
+
+        startModal() {
+            this.find('new-task-modal').style.display = 'initial'
         }
 
     })

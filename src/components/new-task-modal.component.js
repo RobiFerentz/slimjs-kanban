@@ -27,7 +27,7 @@ document.registerElement(
                                     <textarea name="task-desc" class="validate[required,length[6,300]] feedback-input task-desc" id="task-desc" placeholder="Description"></textarea>
                                 </p>
                                 <div class="submit">
-                                    <input type="submit" value="SUBMIT" name="submit" id="submit"/>
+                                    <input type="button" value="SUBMIT" name="submit" id="submit"/>
                                     <div class="ease"></div>
                                 </div>
                             </form>
@@ -58,13 +58,14 @@ document.registerElement(
         }
 
         submitForm() {
-            this.taskData.tasks.push({
-                name: this.find('.task-title').value
+            this.taskData.addTask({
+                name: this.find('.task-title').value,
+                columnId: 0
             });
-            window.alert('SUBMITTED!');
+            this.style.display = 'none'
         }
 
         toggleRepeat() {
-            window.alert('repeat toggled...');
+            window.alert('repeat toggled...')
         }
     })

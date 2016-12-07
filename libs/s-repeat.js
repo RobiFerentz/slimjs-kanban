@@ -32,7 +32,12 @@
                             }
                         }
                         this.appendChild(node)
-                        node.update()
+                        try {
+                            this._applyTextBindings.call(node)
+                            this._applyBindings.call(node)
+                            super.update.call(node)
+                        }
+                        catch (err) {}
                     }
                 }
             }

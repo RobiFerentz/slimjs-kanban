@@ -66,25 +66,17 @@ document.registerElement(
 
         validateForm() {
             let titleValidated = (this.find('.task-title').value.length > 0);
+            let dueValidated = (this.find('.task-due').value.length > 0);
+
             if (!titleValidated) {
                 this.find('.task-title').style.boxShadow = '0px 0px 5px red'
             }
-            // let durationValidated = (this.find('.task-duration').value.length > 0);
-            // if (!durationValidated) {
-                // this.find('.task-duration').style.boxShadow = '0px 0px 5px red'
-            // }
-            let dueValidated = (this.find('.task-due').value.length > 0);
+
             if (!dueValidated) {
                 this.find('.task-due').style.boxShadow = '0px 0px 5px red'
             }
-            if (titleValidated && dueValidated) {
-                this.find('.task-title').value = '';                
-                // this.find('.task-duration').value = '';
-                this.find('.task-due').value = '';
-                return true;
-            } else {
-                return false;
-            }
+
+            return titleValidated && dueValidated
         }
 
         submitForm() {
@@ -93,8 +85,12 @@ document.registerElement(
                 // duration: this.find('.task-duration').value,
                 due: this.find('.task-due').value,
                 desc: this.find('.task-desc').value
-            }, callback);
+            }, this.closeModal.bind(this));
+        }
+
+        closeModal() {
             this.style.display = 'none'
+            this.fieldReset();
         }
 
         toggleRepeat() {

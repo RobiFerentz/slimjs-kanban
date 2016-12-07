@@ -79,7 +79,13 @@
 
         addTask(task, callback) {
             task.columnId = this.defaultColumnId
-            $.post(`${endpoint}/task/add`, task).done( () => {
+            $.ajax( {
+                url: `${endpoint}/task/add`,
+                method: 'POST',
+                contentType:'application/json',
+                data: JSON.stringify(task),
+                dataType: 'json'
+            }).done( () => {
                 this.loadColumns();
                 callback()
             })

@@ -83,8 +83,8 @@ document.registerElement(
             this.taskData.addTask({
                 name: this.find('.task-title').value,
                 // duration: this.find('.task-duration').value,
-                due: this.find('.task-due').value,
-                desc: this.find('.task-desc').value
+                dueDate: this.find('.task-due').value,
+                description: this.find('.task-desc').value
             }, this.closeModal.bind(this));
         }
 
